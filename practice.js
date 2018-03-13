@@ -26,19 +26,17 @@
   Write a function called first that takes in two parameters, an array and a callback function.
   Then invoke the callback function, passing in the first element in the array as it's argument.
 */
-
-// Code Here 
+let first = (array, callBack) => callBack(array[0]);
+// Code Here
 
 // Do not edit the code below.
-var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
+var names = ["Tyler", "Cahlan", "Ryan", "Colt", "Tyler", "Blaine", "Cahlan"];
 
-first(names, function(firstName){
-  console.log('The first name in names is ' + firstName);
+first(names, function(firstName) {
+  console.log("The first name in names is " + firstName);
   return firstName;
 });
 // Do not edit the code above.
-
-
 
 ////////// PROBLEM 2 //////////
 
@@ -46,17 +44,15 @@ first(names, function(firstName){
   Write a function called last that takes in an array and a callback function. 
   Then invoke the callback, passing in the last element in the array as the argument.
 */
-
+let last = (array, callBack) => callBack(array[array.length - 1]);
 //Code Here
 
 // Do not edit the code below.
-last(names, function(lastName){
-  console.log('The last name in names is ' + lastName);
+last(names, function(lastName) {
+  console.log("The last name in names is " + lastName);
   return lastName;
 });
 // Do not edit the code above.
-
-
 
 ////////// PROBLEM 3 //////////
 
@@ -64,16 +60,14 @@ last(names, function(lastName){
   Write a function called multiply that takes in three parameters: two numbers and a callback function.  
   Invoke the callback, passing in the product of the two numbers multiplied as the argument. 
 */
-
+var multiply = (num1, num2, cb) => cb(num1 * num2);
 //Code Here
 
 // Do not edit the code below.
-multiply(4, 3, function(answer){
-  console.log('The answer is ' + answer); //should console.log 12
+multiply(4, 3, function(answer) {
+  console.log("The answer is " + answer); //should console.log 12
 });
 // Do not edit the code above.
-
-
 
 ////////// PROBLEM 4 //////////
 
@@ -83,20 +77,26 @@ multiply(4, 3, function(answer){
   If it does, invoke the callback with true as the argument. 
   If the name does not exist, invoke the callback with false as the argument.
 */
-
-//Code Here 
+var contains = (array, name, callBack) => {
+  for (i = 0; i < array.length; i++) {
+    if (array[i] === name) {
+      callBack(true);
+    } else {
+      return callBack(false);
+    }
+  }
+};
+//Code Here
 
 // Do not edit the code below.
-contains(names, 'Colt', function(result){
-  if(result === true){
-    console.log('Colt is in the array');
+contains(names, "Colt", function(result) {
+  if (result === true) {
+    console.log("Colt is in the array");
   } else {
-    console.log('Colt is not in the array');
+    console.log("Colt is not in the array");
   }
 });
 // Do not edit the code above.
-
-
 
 ////////// PROBLEM 5 //////////
 
@@ -104,16 +104,24 @@ contains(names, 'Colt', function(result){
   Write a function called uniq that takes in an array and a callback function.
   Remove any duplicate values from the array, and invoke the callback with the modified array as an argument.
 */
+let uniq = (array, callBack) => {
+  var newArr = array.filter(
+    (value, index, array) => array.indexOf(value) === index
+  );
+  callBack(newArr);
 
+  return callBack(newArr);
+};
 //Code Here
 
 // Do not edit the code below.
-uniq(names, function(uniqArr){
-  console.log('The new names array with all the duplicate items removed is ', uniqArr);
+uniq(names, function(uniqArr) {
+  console.log(
+    "The new names array with all the duplicate items removed is ",
+    uniqArr
+  );
 });
 // Do not edit the code above.
-
-
 
 ////////// PROBLEM 6 //////////
 
@@ -121,16 +129,18 @@ uniq(names, function(uniqArr){
   Write a function called each that takes in an array of names and a callback function. 
   For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
 */
-
-//Code Here 
+var each = (array, callBack) => {
+  for (i = 0; i < array.length; i++) {
+    callBack(array[i], i);
+  }
+};
+//Code Here
 
 // Do not edit the code below.
-each(names, function(item, indice){
-  console.log('The item in the ' + indice + ' position is ' + item)
+each(names, function(item, indice) {
+  console.log("The item in the " + indice + " position is " + item);
 });
 // Do not edit the code above.
-
-
 
 ////////// PROBLEM 7 //////////
 
@@ -138,32 +148,42 @@ each(names, function(item, indice){
   Write a function called getUserById that takes in three parameters: an array of objects (users), an id and a callback, and searches for the user with a matching id.
   When the correct user object is found, invoke the callback with the user object as an argument.
 */
-
+var getUserById = (users, id, callBack) => {
+  var isFound = users.find(item => item.id === id);
+  callBack(isFound);
+};
 // Code here
 
 // Do not edit the code below.
 var users = [
   {
-    id: '12d',
-    email: 'tyler@gmail.com',
-    name: 'Tyler',
-    address: '167 East 500 North'
+    id: "12d",
+    email: "tyler@gmail.com",
+    name: "Tyler",
+    address: "167 East 500 North"
   },
   {
-    id: '15a',
-    email: 'cahlan@gmail.com',
-    name: 'Cahlan',
-    address: '135 East 320 North'
+    id: "15a",
+    email: "cahlan@gmail.com",
+    name: "Cahlan",
+    address: "135 East 320 North"
   },
   {
-    id: '16t',
-    email: 'ryan@gmail.com',
-    name: 'Ryan',
-    address: '192 East 32 North'
-  },
+    id: "16t",
+    email: "ryan@gmail.com",
+    name: "Ryan",
+    address: "192 East 32 North"
+  }
 ];
 
-getUserById(users, '16t', function(user){
-  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address); 
+getUserById(users, "16t", function(user) {
+  console.log(
+    "The user with the id 16t has the email of " +
+      user.email +
+      " the name of " +
+      user.name +
+      " and the address of " +
+      user.address
+  );
 });
 // Do not edit the code above.
